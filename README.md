@@ -16,13 +16,13 @@ The wing section has two degrees of freedom:
 
 The governing equations are derived from Newton’s second law:
 
-\[
-m \ddot{h} + S \ddot{\alpha} + K_h h = L
-\]
 
-\[
+m \ddot{h} + S \ddot{\alpha} + K_h h = L
+
+
+
 S \ddot{h} + I \ddot{\alpha} + K_\alpha \alpha = M
-\]
+
 
 Where:
 - \(m\): mass  
