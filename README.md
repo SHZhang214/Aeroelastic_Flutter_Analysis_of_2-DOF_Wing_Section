@@ -61,8 +61,9 @@ x = [h, α, ḣ, α̇]^T
 
 and the system matrix A is constructed as:
 
-A = [  0        I  
-     -M⁻¹(K + K_aero)   -M⁻¹ C ]
+A =
+[  0                I  ]
+[ -M⁻¹(K + K_aero)  -M⁻¹ C ]
 
 Flutter is identified by computing the eigenvalues of A:
 
@@ -70,7 +71,6 @@ Flutter is identified by computing the eigenvalues of A:
 - Flutter onset: real part = 0  
 - Unstable: real part > 0  
 
-The flutter speed is determined by sweeping airflow velocity and detecting where the system transitions from stable to unstable.
 ---
 
 ## Features
