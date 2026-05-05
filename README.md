@@ -9,44 +9,33 @@ Flutter is a dynamic instability that occurs when aerodynamic forces feed energy
 
 ## Physical Model
 
-The wing section has two degrees of freedom:
+The governing equations are:
 
-- **Heave (h)** — vertical displacement  
-- **Pitch (α)** — rotation about the elastic axis  
+m ḧ + S α̈ + K_h h = L  
 
-The governing equations are derived from Newton’s second law:
-
-
-m \ddot{h} + S \ddot{\alpha} + K_h h = L
-
-
-
-S \ddot{h} + I \ddot{\alpha} + K_\alpha \alpha = M
-
+S ḧ + I α̈ + K_α α = M  
 
 Where:
-- \(m\): mass  
-- \(I\): moment of inertia  
-- \(S = m x_\alpha\): inertial coupling  
-- \(K_h, K_\alpha\): structural stiffness  
+- m: mass  
+- I: moment of inertia  
+- S: inertial coupling  
+- K_h, K_α: stiffness  
 
 ---
 
 ## Aerodynamic Model
 
-A **quasi-steady thin airfoil model** is used:
+Effective angle of attack:
 
-\[
-\alpha_{\text{eff}} = \alpha - \frac{\dot{h}}{U} + \frac{c}{2U}\dot{\alpha}
-\]
+α_eff = α − ḣ / U + (c / 2U) α̇  
 
-\[
-L = 2\pi \rho U^2 c \, \alpha_{\text{eff}}
-\]
+Lift:
 
-\[
-M = \frac{\pi}{2} \rho U^2 c^2 \left(\alpha + \frac{c}{4U}\dot{\alpha}\right)
-\]
+L = 2π ρ U² c α_eff  
+
+Moment:
+
+M = (π/2) ρ U² c² (α + (c / 4U) α̇)
 
 This introduces **velocity-dependent forces**, which are essential for flutter.
 
@@ -54,24 +43,34 @@ This introduces **velocity-dependent forces**, which are essential for flutter.
 
 ## Methodology
 
-The equations are rewritten in matrix form:
+The equations of motion are written in matrix form:
 
-\[
-M \ddot{x} + C \dot{x} + K x = 0
-\]
+M ẍ + C ẋ + K x = 0
 
-and converted into a **state-space system**:
+where:
 
-\[
-\dot{x} = A x
-\]
+x = [h, α]^T
 
-Flutter is identified by computing the eigenvalues of matrix \(A\):
+This second-order system is converted into a first-order state-space form:
 
-- Stable: Re(λ) < 0  
-- Flutter: Re(λ) = 0  
-- Unstable: Re(λ) > 0  
+ẋ = A x
 
+where the state vector is:
+
+x = [h, α, ḣ, α̇]^T
+
+and the system matrix A is constructed as:
+
+A = [  0        I  
+     -M⁻¹(K + K_aero)   -M⁻¹ C ]
+
+Flutter is identified by computing the eigenvalues of A:
+
+- Stable: real part of eigenvalue < 0  
+- Flutter onset: real part = 0  
+- Unstable: real part > 0  
+
+The flutter speed is determined by sweeping airflow velocity and detecting where the system transitions from stable to unstable.
 ---
 
 ## Features
