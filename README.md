@@ -64,7 +64,7 @@ and the system matrix A is constructed as:
 <pre>
 A =
 
-[  0                I  ]
+[  0                   I   ]
 [ -M⁻¹(K + K_aero)  -M⁻¹ C ]
 </pre>
 
@@ -96,3 +96,10 @@ The model demonstrates:
 - A **critical flutter speed** where stability is lost  
 - Increasing torsional stiffness **raises flutter speed**  
 - Instability arises from **coupling between heave and pitch modes**
+
+---
+
+## Possible Extensions
+- Implement **Theodorsen unsteady aerodynamics**
+- Include structural damping
+- Extend to multi-section wing models
