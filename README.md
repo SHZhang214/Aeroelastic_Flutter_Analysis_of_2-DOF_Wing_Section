@@ -61,9 +61,12 @@ x = [h, α, ḣ, α̇]^T
 
 and the system matrix A is constructed as:
 
+<pre>
 A =
+
 [  0                I  ]
 [ -M⁻¹(K + K_aero)  -M⁻¹ C ]
+</pre>
 
 Flutter is identified by computing the eigenvalues of A:
 
